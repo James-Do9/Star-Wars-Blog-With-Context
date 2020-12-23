@@ -1,0 +1,14 @@
+h1{
+    border-top: 3px solid rgb(59,59,59);
+    border-bottom: 3px solid rgb(59,59,59);
+    margin: 10px auto;
+}
+
+.card{
+background-color: rgb(40,39,39);
+background-image: url("https://www.transparenttextures.com/patterns/real-carbon-fibre.png");
+color:white;
+}
+.card:hover{
+    box-shadow: 0px 0px 30px cyan;
+}
