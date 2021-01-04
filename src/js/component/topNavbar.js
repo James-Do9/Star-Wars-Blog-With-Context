@@ -31,7 +31,7 @@ export const TopNavbar = () => {
 								<NavDropdown
 									title={
 										<span className="colorText ">
-											Favorites{" "}
+											Favorites:{" "}
 											<span className="badge badge-light">{store.favorites.length}</span>
 										</span>
 									}
