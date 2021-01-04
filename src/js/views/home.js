@@ -44,7 +44,7 @@ export class Home extends React.Component {
 					<div>
 						<div className="container">
 							<h1 className="text-center">Characters</h1>
-							<div className="row">
+							<div className="scrolling-wrapper">
 								{store.people.map((character, index) => {
 									return <CharacterCard key={character.uid} propUid={character.uid} />;
 								})}
@@ -52,7 +52,7 @@ export class Home extends React.Component {
 						</div>
 						<div className="container">
 							<h1 className="text-center">Planets</h1>
-							<div className="row">
+							<div className="scrolling-wrapper">
 								{store.planet.map((planet, index) => {
 									return <PlanetCard key={planet.uid} propUid={planet.uid} />;
 								})}

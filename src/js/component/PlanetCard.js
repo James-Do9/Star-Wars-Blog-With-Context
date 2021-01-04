@@ -65,7 +65,7 @@ export class PlanetCard extends React.Component {
 	}
 	render() {
 		return (
-			<div className="col-3 mx-auto" style={{ margin: "10px" }}>
+			<div className="col-3 mx-auto" style={{ margin: "10px", display: "inline-block" }}>
 				{this.state.planetInfo ? (
 					<div className="card" style={{ margin: "10px" }}>
 						<img
