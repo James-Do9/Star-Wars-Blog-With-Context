@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/card.scss";
 import PropTypes from "prop-types";
+import { Context } from "../store/appContext";
 
 export class PlanetCard extends React.Component {
 	constructor(props) {
@@ -66,7 +67,7 @@ export class PlanetCard extends React.Component {
 		return (
 			<div className="col-3 mx-auto" style={{ margin: "10px" }}>
 				{this.state.planetInfo ? (
-					<div className="card" style={({ width: "18rem" }, { margin: "10px" })}>
+					<div className="card" style={{ margin: "10px" }}>
 						<img
 							className="card-img-top border-bottom border-danger"
 							src="https://i.imgflip.com/45d2y6.jpg"
@@ -78,14 +79,26 @@ export class PlanetCard extends React.Component {
 								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros, pulvinar
 								facilisis justo mollis, auctor consequat urna.
 							</p>
-							<Link
-								to={{
-									pathname: "/details/" + this.props.propUid,
-									state: this.state
-								}}
-								className="btn btn-primary">
-								Learn more!
-							</Link>
+							<div className="d-flex justify-content-around">
+								<Link
+									to={{
+										pathname: "/details/" + this.props.propUid,
+										state: this.state
+									}}
+									className="btn btn-primary">
+									Learn more!
+								</Link>
+								<Context.Consumer>
+									{({ store, actions }) => (
+										<button
+											className="btn btn-light"
+											type="button"
+											onClick={() => actions.addToFavorites(this.props.propUid, this.state)}>
+											<i className="fas fa-heart" style={{ color: "red" }} />
+										</button>
+									)}
+								</Context.Consumer>
+							</div>
 						</div>
 					</div>
 				) : null}

@@ -1,28 +1,53 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			people: [],
+			planet: [],
+			favorites: []
 		},
 		actions: {
+			loadInitialData: () => {
+				//do the main fetch
+				//use setStore instead of setState
+				fetch("https://www.swapi.tech/api/people/")
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(jsonifiedResponse => setStore({ people: jsonifiedResponse.results }))
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
+				fetch("https://www.swapi.tech/api/planets/")
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(jsonifiedResponse => setStore({ planet: jsonifiedResponse.results }))
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
+			},
+			addToFavorites: (uid, details) => {
+				const currentStore = getStore();
+				const newFavorites = currentStore.favorites.concat({
+					details: details,
+					uid: uid
+				});
+				setStore({ favorites: newFavorites });
+			},
+			deleteFromFavorites: name => {
+				const currentStore = getStore();
+				const newFavorites = currentStore.favorites.filter(index => index != name);
+				setStore({ favorites: newFavorites });
+			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
 			},
 			changeColor: (index, color) => {
 				//get the store
